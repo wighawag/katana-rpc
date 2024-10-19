@@ -84,7 +84,7 @@ export const katana = defineInstance((parameters: KatanaParameters) => {
           resolver({ process, reject, resolve }) {
             process.stdout.on("data", (data: any) => {
               const message = data.toString();
-              if (message.includes("JSON-RPC server started")) resolve();
+              if (message.includes("RPC server started")) resolve();
             });
             process.stderr.on("data", reject);
           },
