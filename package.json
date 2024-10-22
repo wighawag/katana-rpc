@@ -1,7 +1,7 @@
 {
-  "name": "prool-katana",
-  "version": "0.0.3",
-  "description": "katana instance for prool",
+  "name": "katana-rpc",
+  "version": "0.0.1",
+  "description": "katana rpc package providing types, default accounts and contract plus support for prool",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -11,6 +11,12 @@
       "import": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
+      }
+    },
+    "./prool": {
+      "import": {
+        "types": "./dist/prool.d.ts",
+        "default": "./dist/prool.js"
       }
     }
   },
