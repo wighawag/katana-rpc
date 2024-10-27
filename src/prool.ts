@@ -97,11 +97,11 @@ export const katana = defineInstance((parameters: KatanaParameters) => {
   };
 });
 
-export function createKatanaServer(parameters: {
-  binary?: string;
-  urlWithPoolId: string;
-}) {
-  const urlObject = new URL(parameters.urlWithPoolId);
+export function createKatanaServer(
+  urlWithPoolId: string,
+  parameters?: KatanaParameters
+) {
+  const urlObject = new URL(urlWithPoolId);
   const portString = urlObject.port;
   const portAsNumber = parseInt(portString);
   const port = isNaN(portAsNumber) ? 80 : portAsNumber;
@@ -115,11 +115,11 @@ export function createKatanaServer(parameters: {
 
   return {
     async restart() {
-      await fetch(`${parameters.urlWithPoolId}/restart`);
+      await fetch(`${urlWithPoolId}/restart`);
     },
     async start() {
       return await createServer({
-        instance: katana({ binary: parameters.binary }),
+        instance: katana(parameters || {}),
         port,
       }).start();
     },
