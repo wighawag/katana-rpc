@@ -99,7 +99,7 @@ export const katana = defineInstance((parameters: KatanaParameters) => {
 
 export function createKatanaServer(parameters: {
   binary?: string;
-  poolId: string;
+  poolId: number;
   port?: number;
   host?: string;
 }) {
