@@ -1,6 +1,6 @@
 {
   "name": "katana-rpc",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "katana rpc package providing types, default accounts and contract plus support for prool",
   "type": "module",
   "main": "./dist/index.js",
