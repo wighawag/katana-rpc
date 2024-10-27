@@ -1,7 +1,7 @@
 // import { defineInstance } from "../instance.js";
 // import { execa } from "../processes/execa.js";
 // import { toArgs } from "../utils.js";
-import { defineInstance } from "prool";
+import { createServer, defineInstance } from "prool";
 import { execa } from "prool/processes";
 import { toArgs } from "./utils/index.js";
 
@@ -96,3 +96,27 @@ export const katana = defineInstance((parameters: KatanaParameters) => {
     },
   };
 });
+
+export function createKatanaServer(parameters: {
+  binary?: string;
+  poolId: string;
+  port?: number;
+  host?: string;
+}) {
+  const port = parameters.port || 5051;
+  const rpcUrl = {
+    http: `${parameters.host || "http://127.0.0.1"}:${port}/${parameters.poolId}`,
+  } as const;
+
+  return {
+    async restart() {
+      await fetch(`${rpcUrl.http}/restart`);
+    },
+    async start() {
+      return await createServer({
+        instance: katana({ binary: parameters.binary }),
+        port,
+      }).start();
+    },
+  } as const;
+}
